@@ -1,0 +1,11 @@
+import Foundation
+import beUnit
+
+class SourceryTestCasesProvider: TestCasesProvider {
+    
+    func findAll() -> [TestCase] {
+        return [
+            //TODO: template here
+        ]
+    }
+}

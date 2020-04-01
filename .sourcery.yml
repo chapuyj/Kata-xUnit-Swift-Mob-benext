@@ -1,0 +1,6 @@
+sources:
+  - ./Sources
+templates:
+  - ./Sources/beUnitRunner/Sourcery/Templates
+output:
+  ./Sources/beUnitRunner/Sourcery/Generated
