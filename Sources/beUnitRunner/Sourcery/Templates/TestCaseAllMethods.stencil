@@ -1,0 +1,15 @@
+import beUnit
+
+{% for type in types.implementing.TestCase %}
+extension {{ type.name }} {
+    var allTestMethods: [TestMethod] {
+        return [
+            {% for method in type.methods %}
+            {% if method.selectorName|hasPrefix:"test" %}
+            {{ type.name }}().{{ method.selectorName }},
+            {% endif %}
+            {% endfor %}
+        ]
+    }
+}
+{% endfor %}

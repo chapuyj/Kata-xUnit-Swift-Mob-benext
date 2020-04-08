@@ -7,7 +7,8 @@ import beUnit
 class SourceryTestCasesProvider: TestCasesProvider {
     func findAll() -> [TestCase] {
         return [
-            //TODO: template here
+            BooleanTests(),
+            IntegerEqualityTests(),
         ]
     }
 }

@@ -1,3 +1,3 @@
-let testCasesProvider = ManualTestCasesProvider()
+let testCasesProvider = SourceryTestCasesProvider()
 let testRunner = TestRunner(testCasesProvider: testCasesProvider)
 testRunner.start()

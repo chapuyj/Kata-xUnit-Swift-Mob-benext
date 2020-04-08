@@ -5,7 +5,9 @@ class SourceryTestCasesProvider: TestCasesProvider {
     
     func findAll() -> [TestCase] {
         return [
-            //TODO: template here
+            {% for type in types.implementing.TestCase %}
+            {{type.name}}(),
+            {% endfor %}
         ]
     }
 }
