@@ -4,6 +4,7 @@ class BooleanTests: TestCase {
 
     func testTrue() {
         print("test true")
+        assertTrue(true)
     }
 
     func testFalse() {

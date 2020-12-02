@@ -10,7 +10,11 @@ class TestRunner {
     }
 
     func start() {
+
         let testCases = testCasesProvider.findAll()
+
+        TestMethodInjector().inject()
+
         testCases.forEach { testCase in
             testCase.run()
         }
@@ -20,7 +24,7 @@ class TestRunner {
 private extension TestCase {
 
     func run() {
-        allTestMethods.forEach { testMethod in
+        Self.allTestMethods.forEach { testMethod in
             testMethod()
         }
     }

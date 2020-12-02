@@ -1,9 +1,47 @@
 import beUnit
 
-{% for type in types.implementing.TestCase %}
-extension {{ type.name }} {
-    var allTestMethods: [TestMethod] {
-        return [
+public func allTestMethods(forClassName className: String) -> [TestMethod] {
+    switch className {
+
+    {% for type in types.inheriting.TestCase %}
+    case "{{ type.name }}":
+        return {{ type.name }}_allTestMethods()
+    {% endfor %}
+
+    default:
+        return []
+    }
+}
+
+{% for type in types.inheriting.TestCase %}
+
+private func {{ type.name }}_allTestMethods() -> [TestMethod] {
+    return [
+        {% for method in type.methods %}
+        {% if method.selectorName|hasPrefix:"test" %}
+        {{ type.name }}().{{ method.selectorName }},
+        {% endif %}
+        {% endfor %}
+    ]
+}
+
+{% endfor %}
+
+
+internal class TestMethodInjector {
+
+    init() {}
+
+    func inject() {
+        {% for type in types.inheriting.TestCase %}
+        inject_{{ type.name }}()
+        {% endfor %}
+    }
+
+    {% for type in types.inheriting.TestCase %}
+
+    private func inject_{{ type.name }}() {
+        {{ type.name }}.allTestMethods = [
             {% for method in type.methods %}
             {% if method.selectorName|hasPrefix:"test" %}
             {{ type.name }}().{{ method.selectorName }},
@@ -11,5 +49,6 @@ extension {{ type.name }} {
             {% endfor %}
         ]
     }
+        
+    {% endfor %}
 }
-{% endfor %}
